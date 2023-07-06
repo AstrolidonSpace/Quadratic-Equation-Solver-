@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quadratic Equation Solver</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 alignment="CENTER">ax²+bx+c=0</h1>
+        <h2>Quadratic Equation Solver</h2>
+        <form id="quadratic-form">
+            <label for="a">Enter the value of a:</label>
+            <input type="number" id="a" required>
+            <label for="b">Enter the value of b:</label>
+            <input type="number" id="b" required>
+            <label for="c">Enter the value of c:</label>
+            <input type="number" id="c" required>
+            <button type="submit">Compute Solutions</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("quadratic-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            var a = parseInt(document.getElementById("a").value);
+            var b = parseInt(document.getElementById("b").value);
+            var c = parseInt(document.getElementById("c").value);
+            
+            var discriminant = Math.pow(b, 2) - 4 * a * c;
+            var solution1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+            var solution2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+
+            var resultElement = document.getElementById("result");
+            if (isNaN(solution1) || isNaN(solution2)) {
+                resultElement.innerHTML = "Invalid input. Please enter valid coefficients.";
+            } else if (discriminant > 0) {
+                resultElement.innerHTML = "The solutions are: " + solution1.toFixed(2) + " and " + solution2.toFixed(2);
+            } else if (discriminant === 0) {
+                resultElement.innerHTML = "The solution is: " + solution1.toFixed(2);
+            } else {
+                resultElement.innerHTML = "The equation has no real solutions.";
+            }
+        });
+    </script>
+</body>
+</html>
+
